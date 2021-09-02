@@ -1,12 +1,23 @@
 //import liraries
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Platform, Alert } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import { api } from './constants';
 import { androidCameraPermission } from './permissions';
 import axios from 'axios';
+import codePush from "react-native-code-push";
+
+let codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_START };
+
 
 const App = () => {
+
+  useEffect(() => {
+    codePush.sync({
+      updateDialog: true,
+      installMode: codePush.InstallMode.IMMEDIATE
+    });
+  }, [])
 
   const onSelectImage = async () => {
     const permissionStatus = await androidCameraPermission()
@@ -75,6 +86,7 @@ const App = () => {
         onPress={onSelectImage}
       >
         <Text style={styles.textStyle}>Upload Image</Text>
+        <Text>Don</Text>
       </TouchableOpacity>
     </View>
   );
@@ -102,4 +114,4 @@ const styles = StyleSheet.create({
 });
 
 //make this component available to the app
-export default App;
+export default codePush(codePushOptions)(App)
