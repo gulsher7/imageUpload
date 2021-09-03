@@ -85,7 +85,7 @@ const App = () => {
         activeOpacity={0.8}
         onPress={onSelectImage}
       >
-        <Text style={styles.textStyle}>Upload</Text>
+        <Text style={styles.textStyle}>select your image</Text>
 
       </TouchableOpacity>
     </View>
